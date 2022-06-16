@@ -202,7 +202,6 @@ var glutenFree = function(desserts) {
       value.glutenFree = false;
     }
   });
-  console.log(desserts);
   return desserts;
 };
 
@@ -225,7 +224,16 @@ var glutenFree = function(desserts) {
     }
   ];
 
+  I: array of item objects
+  O:array of item objects - add a new key salePrice
+  C: None
+  E: None
 */
 var applyCoupon = function(groceries, coupon) {
-
+  var coupons = _.map(groceries, function(grocery, index, groceries) {
+    var currentPrice = parseFloat(grocery.price.substring(1));
+    grocery.salePrice = '$' + (currentPrice - (currentPrice * coupon)).toFixed(2);
+    return grocery;
+  });
+  return coupons;
 };
